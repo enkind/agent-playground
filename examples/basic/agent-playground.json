@@ -1,0 +1,13 @@
+{
+  "$schema": "../../schema/config.schema.json",
+  "agent": "codex",
+  "collection": {
+    "plugins": [{ "path": "./plugins/hello" }],
+    "skills": ["./skills/release-notes"],
+    "mcpServers": {
+      "playground-time": { "command": "node", "args": ["./mcp/time-server.mjs"], "cwd": "." }
+    }
+  },
+  "fixtures": ["./fixtures"],
+  "workspace": { "template": "./workspace" }
+}

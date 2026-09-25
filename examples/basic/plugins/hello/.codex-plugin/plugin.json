@@ -1,0 +1,11 @@
+{
+  "name": "hello-playground",
+  "version": "0.1.0",
+  "description": "A tiny plugin used to try agent-playground.",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Hello Playground",
+    "shortDescription": "Greets you from inside the playground",
+    "category": "Productivity"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "agent-playground",
+  "version": "0.1.0",
+  "description": "An isolated, disposable agent instance for developing plugins, skills, and MCP servers where your users are.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "agent-playground": "bin/agent-playground.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "schema"
+  ],
+  "engines": {
+    "node": ">=20.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enkind/agent-playground.git"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\"",
+    "docs:build": "node docs/build.mjs",
+    "docs:dev": "node docs/build.mjs && npx --yes serve docs/dist"
+  },
+  "devDependencies": {
+    "marked": "^14.1.4"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/enkind/agent-playground/main/schema/config.schema.json",
+  "title": "agent-playground config",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "agent": {
+      "description": "Which agent to launch.",
+      "enum": ["codex"],
+      "default": "codex"
+    },
+    "auth": {
+      "description": "\"borrow\" reuses your current access token without the refresh token. \"login\" signs the isolated instance in separately on every run.",
+      "enum": ["borrow", "login"],
+      "default": "borrow"
+    },
+    "before": {
+      "description": "Commands that must succeed before the playground starts, such as a build.",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "required": ["command"],
+            "additionalProperties": false,
+            "properties": {
+              "command": { "type": "string" },
+              "cwd": { "type": "string" },
+              "env": { "$ref": "#/$defs/stringMap" }
+            }
+          }
+        ]
+      }
+    },
+    "services": {
+      "description": "Long-running processes (such as your MCP dev server) started before the app and stopped when it closes.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["command"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "command": { "type": "string" },
+          "cwd": { "type": "string" },
+          "env": { "$ref": "#/$defs/stringMap" },
+          "readyUrl": { "type": "string", "description": "The app launches once this URL answers." }
+        }
+      }
+    },
+    "collection": {
+      "description": "The plugins, skills, and MCP servers installed into every run.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plugins": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string", "description": "Path to a plugin folder containing .codex-plugin/plugin.json." },
+              {
+                "type": "object",
+                "required": ["path"],
+                "additionalProperties": false,
+                "properties": {
+                  "path": { "type": "string" },
+                  "mcpServers": {
+                    "type": "object",
+                    "description": "Replaces MCP servers by name in the staged copy, for example to point at a local dev server. Use null to remove one.",
+                    "additionalProperties": { "type": ["object", "null"] }
+                  },
+                  "watch": { "type": "boolean", "default": true }
+                }
+              },
+              {
+                "type": "object",
+                "required": ["marketplace", "plugin"],
+                "additionalProperties": false,
+                "properties": {
+                  "marketplace": { "type": "string", "description": "A local marketplace path or a Git source accepted by `codex plugin marketplace add`." },
+                  "plugin": { "type": "string" }
+                }
+              }
+            ]
+          }
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string", "description": "Path to a folder containing SKILL.md." },
+              {
+                "type": "object",
+                "required": ["path"],
+                "additionalProperties": false,
+                "properties": {
+                  "path": { "type": "string" },
+                  "watch": { "type": "boolean", "default": true }
+                }
+              }
+            ]
+          }
+        },
+        "mcpServers": {
+          "type": "object",
+          "propertyNames": { "pattern": "^[A-Za-z0-9_-]+$" },
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": ["url"],
+                "additionalProperties": false,
+                "properties": {
+                  "url": { "type": "string" },
+                  "bearerTokenEnvVar": { "type": "string" }
+                }
+              },
+              {
+                "type": "object",
+                "required": ["command"],
+                "additionalProperties": false,
+                "properties": {
+                  "command": { "type": "string" },
+                  "args": { "type": "array", "items": { "type": "string" } },
+                  "env": { "$ref": "#/$defs/stringMap" },
+                  "cwd": { "type": "string" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "fixtures": {
+      "description": "Fixture folders, or folders of fixture folders, seeded as threads.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "workspace": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "template": { "type": "string", "description": "Copied into the scratch workspace that fixture threads run in." }
+      }
+    },
+    "codex": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "app": { "type": "string", "default": "/Applications/ChatGPT.app" },
+        "cli": { "type": "string" },
+        "disableBundledPlugins": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Names of bundled plugins (for example \"visualize\") to disable in the isolated instance."
+        },
+        "config": {
+          "type": "object",
+          "description": "Merged into the isolated config.toml."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stringMap": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}
