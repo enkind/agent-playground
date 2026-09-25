@@ -44,6 +44,7 @@ Documentation: [agent-playground docs](https://agent-playground-docs.vercel.app)
 npm test                 # unit tests
 npm run docs:build       # builds docs/dist
 node bin/agent-playground.mjs dev --dry-run --config examples/basic/agent-playground.json
+vercel deploy --prod     # publishes the docs (project: agent-playground-docs)
 ```
 
 ## License
