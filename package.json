@@ -1,5 +1,5 @@
 {
-  "name": "agent-playground",
+  "name": "@enkind/agent-playground",
   "version": "0.1.0",
   "description": "An isolated, disposable agent instance for developing plugins, skills, and MCP servers where your users are.",
   "type": "module",
@@ -18,6 +18,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/enkind/agent-playground.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "node --test \"test/*.test.mjs\"",

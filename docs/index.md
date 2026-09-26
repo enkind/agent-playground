@@ -11,8 +11,8 @@ Supported today: **Codex** desktop on macOS.
 Requirements: macOS, Node.js 20.12 or newer, the ChatGPT desktop app with Codex, and a signed-in Codex.
 
 ```sh
-npm install --save-dev github:enkind/agent-playground
-npx agent-playground init
+npm install --save-dev @enkind/agent-playground
+npx @enkind/agent-playground init
 ```
 
 Edit the generated `agent-playground.json`:
@@ -31,7 +31,7 @@ Edit the generated `agent-playground.json`:
 Then start the playground:
 
 ```sh
-npx agent-playground dev
+npx @enkind/agent-playground dev
 ```
 
 A separate Codex window opens. Your fixtures appear under **Recents**, and your plugins and skills are installed. Edit a skill or a plugin file and it is reinstalled right away; start a new chat to pick up the change.

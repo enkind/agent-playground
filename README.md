@@ -7,9 +7,9 @@ A disposable, isolated agent instance for developing plugins, skills, and MCP se
 Codex (macOS desktop app) is supported today. The adapter layer is built so other agents can be added.
 
 ```sh
-npm install --save-dev github:enkind/agent-playground
-npx agent-playground init
-npx agent-playground dev
+npm install --save-dev @enkind/agent-playground
+npx @enkind/agent-playground init
+npx @enkind/agent-playground dev
 ```
 
 ```json
@@ -32,8 +32,8 @@ npx agent-playground dev
 Turn a real thread into a fixture:
 
 ```sh
-npx agent-playground threads
-npx agent-playground export <thread-id> --out playground/fixtures/my-scenario
+npx @enkind/agent-playground threads
+npx @enkind/agent-playground export <thread-id> --out playground/fixtures/my-scenario
 ```
 
 Documentation: [agent-playground docs](https://agent-playground-docs.vercel.app). The [security review](docs/security-review.md) explains every workaround and why it is safe.
@@ -46,6 +46,15 @@ npm run docs:build       # builds docs/dist
 node bin/agent-playground.mjs dev --dry-run --config examples/basic/agent-playground.json
 vercel deploy --prod     # publishes the docs (project: agent-playground-docs)
 ```
+
+## Releasing
+
+```sh
+npm version patch        # bumps package.json and creates the vX.Y.Z tag
+git push --follow-tags   # the release workflow tests, publishes to npm, and creates the GitHub release
+```
+
+Publishing uses [npm trusted publishing](https://docs.npmjs.com/trusted-publishers), so no npm token is stored in the repository.
 
 ## License
 

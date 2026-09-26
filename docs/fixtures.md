@@ -44,7 +44,7 @@ Folders that use the older `meta.json` format from `better-response` keep workin
 Have the conversation you want in Codex, then:
 
 ```sh
-npx agent-playground threads
+npx @enkind/agent-playground threads
 ```
 
 ```text
@@ -52,7 +52,7 @@ npx agent-playground threads
 ```
 
 ```sh
-npx agent-playground export 01a0da0e-c1f5-7372-b53e-5aaba27e2429 \
+npx @enkind/agent-playground export 01a0da0e-c1f5-7372-b53e-5aaba27e2429 \
   --out playground/fixtures/hiking \
   --name "Weekend hiking packing list"
 ```
