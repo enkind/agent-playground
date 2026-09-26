@@ -1,6 +1,6 @@
 {
   "name": "@enkind/agent-playground",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An isolated, disposable agent instance for developing plugins, skills, and MCP servers where your users are.",
   "type": "module",
   "license": "MIT",
